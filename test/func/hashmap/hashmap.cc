@@ -9,7 +9,8 @@
 
 #include <unordered_map>
 
-using namespace snmalloc;
+//snmalloc: snmalloc is a high-performance, secure, and memory-efficient allocator developed by Microsoft. The snmalloc allocator can be used as a replacement for the standard malloc/free memory allocation functions.
+using namespace snmalloc; 
 using namespace verona::rt;
 
 template<typename Entry, typename Model>
@@ -61,8 +62,11 @@ struct Key : public VCown<Key>
 
 bool test(size_t seed)
 {
+  //using Alloc = snmalloc::LocalAllocator<snmalloc::StandardConfig>;
+  //so ThreadAlloc::get() return Alloc type which is defined in snmalloc library.
   auto& alloc = ThreadAlloc::get();
   ObjectMap<std::pair<Key*, int32_t>> map(alloc);
+  
   std::unordered_map<Key*, int32_t> model;
 
   xoroshiro::p128r64 rng{seed};
@@ -73,7 +77,7 @@ bool test(size_t seed)
   static constexpr size_t entries = 100;
   for (size_t i = 0; i < entries; i++)
   {
-    auto* key = new (alloc) Key();
+    auto* key = new (alloc) Key(); //what does the Key refer to? 
     auto entry = std::make_pair(key, (int32_t)i);
     err << "insert " << key
 #ifdef USE_SYSTEMATIC_TESTING
@@ -82,6 +86,9 @@ bool test(size_t seed)
         << "\n";
     model.insert(entry);
     auto insertion = map.insert(alloc, entry);
+
+    std::cout << err.str() << std::flush;
+
     if ((insertion.first != true) || (insertion.second.key() != key))
     {
       map.debug_layout(err)

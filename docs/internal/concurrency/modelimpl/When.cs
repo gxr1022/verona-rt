@@ -32,6 +32,7 @@ class Behaviour
 
     /// <summary>
     ///   How many requests are outstanding for the behaviour.
+    ///   how many predecessor behaviours must complete before the behaviour can execute.
     /// </summary>
     int count;
     
@@ -99,6 +100,8 @@ class Behaviour
     /// <remarks>
     ///  Called when a request is at the head of the queue for a particular cown.
     ///  If this is the last request, then the thunk is scheduled.
+    ///  When one predecessor can be removed from the dependency gragh. It decrements the count of predecessors, and if count is decremented to zero, it passes the behaviour to Task.run for execution.
+    ///  The task runs the behaviour body and once the body completes, it release each of its associated requests.
     /// </remarks>
     internal void ResolveOne()
     {
@@ -111,6 +114,7 @@ class Behaviour
                 // Run body.
                 thunk();
                 // Release all the cowns.
+                
                 foreach (var r in requests)
                 {
                     r.Release();
@@ -122,7 +126,7 @@ class Behaviour
 }
 
 /// <summary>
-///   A request for a cown.
+///   A request for a cown.                                                                                                                                            
 /// </summary>
 /// <remarks>
 ///   This is used to wait for a cown to be available for a particular behaviour.
@@ -141,11 +145,11 @@ class Request
     /// <summary>
     ///   The cown that this request is for.
     /// </summary>
-    CownBase target;
+    CownBase target;                                
 
     public Request(CownBase t)
     {
-        target = t;
+        target = t;                                                                                                                                                                                                                                                                            
     }
 
     /// <summary>

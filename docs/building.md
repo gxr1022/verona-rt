@@ -11,8 +11,7 @@ msbuild verona-rt-all.sln /m /P:Configuration=RelWithDebInfo
 
 On Windows, a separate directory is used to keep the binaries for each build configuration.
 
-
-# Building on Linux
+# Building on Linux 
 
 ```
 mkdir build_ninja

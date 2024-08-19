@@ -87,11 +87,12 @@ void early_release_test(bool first, bool second)
 {
   Cown* cowns[2];
   Logging::cout() << "Early release: begin" << Logging::endl;
-  auto* a = new A;
-  auto* b = new B;
+  auto* a = new A; 
+  auto* b = new B; 
 
   cowns[0] = a;
   cowns[1] = b;
+
 
   schedule_lambda(2, cowns, [=]() {
     start();

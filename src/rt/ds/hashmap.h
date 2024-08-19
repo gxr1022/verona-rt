@@ -93,6 +93,7 @@ namespace verona::rt
      */
     void init_alloc(Alloc& alloc)
     {
+      //eturns the number of trailing zero bits in the binary representation of init_capacity. For 8 (which in binary is 1000), the result would be 3 because there are three trailing zeros.
       static constexpr size_t init_capacity = 8;
       capacity_shift = (uint8_t)bits::ctz(init_capacity);
       slots = (Entry*)alloc.alloc<init_capacity * sizeof(Entry), YesZero>();
@@ -212,7 +213,7 @@ namespace verona::rt
       {
         return !(*this == other);
       }
-    };
+    }; //end of iterator
 
     /**
      * Create an `ObjectMap` with an initial capacity for at least 8 entries.

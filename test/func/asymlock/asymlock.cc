@@ -8,7 +8,7 @@
 
 #include <ds/asymlock.h>
 #include <thread>
-
+using namespace std;
 /**
  * Test a basic race between internal and external acquire.
  */
@@ -64,6 +64,7 @@ void test_race1()
     {} // Spin until internal thread has acquired the lock
     lock.external_acquire();
     protected_value++;
+    // std::cout<<protected_value<<std::endl;
     lock.external_release();
   });
 

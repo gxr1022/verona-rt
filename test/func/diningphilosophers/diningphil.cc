@@ -19,6 +19,7 @@ struct Fork : public VCown<Fork>
 
 struct Ping
 {
+
   void operator()() {}
 };
 
@@ -79,7 +80,7 @@ struct Ponder
 
   void operator()()
   {
-    Logging::cout() << "Philosopher " << p->id << " " << p << " pondering "
+    Logging::cout() << "  " << p->id << " " << p << " pondering "
                     << p->to_eat << std::endl;
     eat_send(p);
   }
@@ -154,6 +155,7 @@ void test_dining(
 
     std::vector<Cown*> my_forks;
 
+    // sort forks according to id.
     std::sort(forks.begin(), forks.end(), [&scrambler](Fork*& a, Fork*& b) {
       return scrambler.perm(((Cown*)a)->id()) <
         scrambler.perm(((Cown*)b)->id());
@@ -161,7 +163,9 @@ void test_dining(
 
     for (size_t j = 0; j < fork_count; j++)
     {
-      forks[j]->uses_expected += hunger;
+      forks[j]->uses_expected += hunger; //?
+
+      
       Cown::acquire(forks[j]);
       my_forks.push_back(forks[j]);
     }
