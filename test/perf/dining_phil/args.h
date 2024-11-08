@@ -4,7 +4,7 @@
 
 // Command line parametes
 inline size_t HUNGER = 500;
-inline size_t NUM_PHILOSOPHERS = 50;
+inline size_t NUM_PHILOSOPHERS = 100;
 inline bool OPTIMAL_ORDER = false;
 inline size_t WORK_USEC = 1000;
 inline bool MANUAL_LOCK_ORDER = false;

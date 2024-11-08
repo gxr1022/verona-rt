@@ -1,0 +1,6 @@
+/users/Xuran/verona-rt/build/test/perf-con-dining_phil
+Harness starting.
+ /users/Xuran/verona-rt/build/test/perf-con-dining_phil --cores 39 --ponder_usec 0 --seed 1804547490
+Seed: 1804547490
+Time so far: 14 ms
+Test Harness Finished!

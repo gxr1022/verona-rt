@@ -3,6 +3,9 @@
 #include <debug/harness.h>
 
 // Command line parametes
+// inline size_t TRANSACTIONS = 1024;
+// inline size_t NUM_WORKERS = 64;
+// inline size_t NUM_ACCOUNTS = 64;
 inline size_t TRANSACTIONS = 50;
 inline size_t NUM_WORKERS = 36;
 inline size_t NUM_ACCOUNTS = 36;

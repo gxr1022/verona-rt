@@ -1,0 +1,9 @@
+/users/Xuran/verona-rt/build/test/perf-con-banking
+Harness starting.
+ /users/Xuran/verona-rt/build/test/perf-con-banking --cores 9 --work_usec 1 --num_trans 100000 --accounts 1024 --seed 892026190
+Seed: 892026190
+Init scheduler time: 142770 ns
+Schedule behaviours time: 149422 ns
+Run behaviours time: 46 ms
+Time so far: 47 ms
+Test Harness Finished!

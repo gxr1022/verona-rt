@@ -157,12 +157,24 @@ public:
 #else
       UNUSED(seed);
 #endif
-
+      
+      auto start_time = std::chrono::steady_clock::now();
       sched.init(cores, run_at_termination);
+      auto current_time = std::chrono::steady_clock::now();
+      auto duration_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time - start_time).count();
+      std::cout << "Init scheduler time: " << duration_ns << " ns" << std::endl;
 
+      start_time = std::chrono::steady_clock::now();
       f(std::forward<Args>(args)...);
+      current_time = std::chrono::steady_clock::now();
+      duration_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(current_time - start_time).count();
+      std::cout << "Schedule behaviours time: " << duration_ns << " ns" << std::endl;
 
+      start_time = std::chrono::steady_clock::now();
       sched.run();
+      current_time = std::chrono::steady_clock::now();
+      duration_ns = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - start_time).count();
+      std::cout << "Run behaviours time: " << duration_ns << " ms" << std::endl;
 
       Logging::cout() << "Joining external threads" << std::endl;
 
@@ -182,7 +194,7 @@ public:
         heap::debug_check_empty();
       high_resolution_clock::time_point t1 = high_resolution_clock::now();
       std::cout << "Time so far: "
-                << duration_cast<seconds>((t1 - start)).count() << " seconds"
+                << duration_cast<milliseconds>((t1 - start)).count() << " ms"
                 << std::endl;
     }
 

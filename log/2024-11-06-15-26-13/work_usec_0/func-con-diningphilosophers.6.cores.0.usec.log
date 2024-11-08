@@ -1,0 +1,9 @@
+/users/Xuran/verona-rt/build/test/func-con-diningphilosophers
+Harness starting.
+ /users/Xuran/verona-rt/build/test/func-con-diningphilosophers --cores 6 --ponder_usec 0 --seed 279574070
+ --philosophers 4
+ --hunger 4
+ --forks 2
+Seed: 279574070
+Time so far: 1 ms
+Test Harness Finished!

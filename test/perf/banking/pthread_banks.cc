@@ -10,6 +10,7 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <chrono>
 
 namespace
 {
@@ -23,6 +24,9 @@ namespace
 
   /// Something representing the loggers state.
   uint64_t tx_count = 0;
+
+  /// Total execution time
+  std::chrono::duration<double> total_time;
 }
 
 void thread_main(size_t id)
@@ -56,6 +60,8 @@ int pthread_main()
 {
   accounts = new std::mutex[NUM_ACCOUNTS];
 
+  auto start_time = std::chrono::high_resolution_clock::now();
+
   std::vector<std::thread> workers;
   for (size_t i = 0; i < NUM_WORKERS; i++)
   {
@@ -64,6 +70,12 @@ int pthread_main()
 
   std::for_each(
     workers.begin(), workers.end(), [](std::thread& t) { t.join(); });
+
+  auto end_time = std::chrono::high_resolution_clock::now();
+  total_time = end_time - start_time;
+
+  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(total_time).count();
+  std::cout << "Time so far: " << ms << " ms" << std::endl;
 
   return 0;
 }

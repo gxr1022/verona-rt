@@ -1,0 +1,6 @@
+/users/Xuran/verona-rt/build/test/perf-con-banking
+Harness starting.
+ /users/Xuran/verona-rt/build/test/perf-con-banking --cores 12 --work_usec 0 --num_trans 102400 --accounts 256 --seed 969660676
+Seed: 969660676
+Time so far: 65 ms
+Test Harness Finished!

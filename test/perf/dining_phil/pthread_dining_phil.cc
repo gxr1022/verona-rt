@@ -13,6 +13,7 @@
 namespace
 {
   std::mutex* forks;
+  std::chrono::duration<double> total_time;
 }
 
 void philosopher_main(size_t phil_id, size_t hunger)
@@ -45,6 +46,8 @@ int pthread_main()
 {
   forks = new std::mutex[NUM_PHILOSOPHERS];
 
+  auto start_time = std::chrono::high_resolution_clock::now();
+
   std::vector<std::thread> philosophers;
   if (OPTIMAL_ORDER)
   {
@@ -70,6 +73,12 @@ int pthread_main()
 
   std::for_each(
     philosophers.begin(), philosophers.end(), [](std::thread& t) { t.join(); });
+
+  auto end_time = std::chrono::high_resolution_clock::now();
+  total_time = end_time - start_time;
+
+  auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(total_time).count();
+  std::cout << "Time so far: " << ms << " ms" << std::endl;
 
   return 0;
 }

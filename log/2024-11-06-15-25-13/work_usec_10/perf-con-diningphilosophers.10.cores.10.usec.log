@@ -1,0 +1,2 @@
+/users/Xuran/verona-rt/build/test/perf-con-diningphilosophers
+stdbuf: failed to run command ‘/users/Xuran/verona-rt/build/test/perf-con-diningphilosophers’: No such file or directory
